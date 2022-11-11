@@ -32,15 +32,15 @@ function searchBooks(seachTerm){
        for(let i = 0; i < bookList.length; i++){
         const title = bookList[i].title.toLowerCase();
         if(title.indexOf(seachTerm.toLowerCase()) >= 0) {
-            filterdList.push(bookList[0]);
+            filterdList.push(bookList[i]);
         }
        }
        renderBookList(filterdList);
     
 }
-searchBooks("e");
 
 function renderBookList(list) {
+    /*element i Html-listan visas/döljs beronde på listans innehåll */
     console.log(list);
 }
 
