@@ -12,35 +12,16 @@ const bookList = [
     title: "hamlet"
 }
 ];
-/* const searchInput = document.children[0].children[1].children[1].children[1]; */
 
-
-searchField.addEventListener("keyup", handleKeyPress);
-
-function handleKeyPress(e){
-    /*ta emot/läsa av värder i inputfältet.
-    Skicka värdet till searchbooks
-    search books reunerar en filtrerad lista
-    Filtrerade listan skickas til renderBookList  */
-    searchBooks(e.target.value);
-}
-
-function searchBooks(seachTerm){
-    /* loopa igenom Booklist
-       För varje varv i loopem, ta det akuella elementet (boken)
-       Jämför titeln med söktermen
-       om söktärmen finns någonstans i titelm, lägg till elementet i ny lista (filterdList)
-       Returnera filterLiset eller anropar renderBookList*/
-       const filterdList = [];
-       for(let i = 0; i < bookList.length; i++){
-        const title = bookList[i].title.toLowerCase();
-        if(title.indexOf(seachTerm.toLowerCase()) >= 0) {
-            filterdList.push(bookList[i]);
-        }
-       }
-       renderBookList(filterdList);
-    
-}
+/*searchField.addEventListener("keyup",(e) => searchBooks(e.target.value));*/
+searchField.addEventListener("keyup",(e) =>
+ renderBookList(
+    bookList.filter(({title, author}) =>  {
+    const seachTerm = e.target.value.toLowerCase();
+    return title.toLowerCase().indexOf(seachTerm) >= 0 || author.toLowerCase().indexOf(seachTerm) >= 0;
+    })
+    )
+);
 
 function renderBookList(bookList) {
     /*element i Html-listan visas/döljs beronde på listans innehåll */
